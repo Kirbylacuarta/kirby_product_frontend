@@ -31,10 +31,13 @@ export default function ProductForm({ product, onSaved, onCancel }) {
 
   return (
     <div className="modal-backdrop" onClick={onCancel}>
-      <div className="card modal" onClick={(e) => e.stopPropagation()}>
-        <h2>{editing ? 'Edit product' : 'Add product'}</h2>
-        {error && <div className="alert error">{error}</div>}
-        <form onSubmit={submit}>
+      <section className="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-form-title" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-heading">
+          <div><p className="eyebrow">Market inventory</p><h2 id="product-form-title">{editing ? 'Refine the details.' : 'Add something good.'}</h2></div>
+          <button type="button" className="close-button" onClick={onCancel} aria-label="Close product form">×</button>
+        </div>
+        {error && <div className="alert error" role="alert">{error}</div>}
+        <form className="market-form product-form" onSubmit={submit}>
           <label>Product name
             <input value={form.product_name} onChange={set('product_name')} maxLength={100} required autoFocus />
           </label>
@@ -50,11 +53,11 @@ export default function ProductForm({ product, onSaved, onCancel }) {
             </label>
           </div>
           <div className="actions">
-            <button type="button" className="secondary" onClick={onCancel}>Cancel</button>
-            <button disabled={busy}>{busy ? 'Saving…' : 'Save'}</button>
+            <button type="button" className="button button-outline" onClick={onCancel}>Cancel</button>
+            <button className="button button-dark" disabled={busy}>{busy ? 'Saving…' : editing ? 'Save changes' : 'Add to market'}</button>
           </div>
         </form>
-      </div>
+      </section>
     </div>
   );
 }

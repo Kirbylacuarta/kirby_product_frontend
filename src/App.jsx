@@ -25,7 +25,15 @@ export default function App() {
     setUser(null);
   };
 
-  if (checking) return <p className="center">Loading…</p>;
+  if (checking) {
+    return (
+      <div className="loading-screen">
+        <a className="wordmark" href="#" aria-label="Common Market home"><span className="wordmark-mark">c.</span><span>common<span className="wordmark-light">market</span></span></a>
+        <span className="loading-label">Opening the market</span>
+        <span className="loading-line" />
+      </div>
+    );
+  }
 
   return user
     ? <ProductList user={user} onLogout={handleLogout} />
